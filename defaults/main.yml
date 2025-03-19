@@ -1,1 +1,6 @@
-
+---
+mysql_port: 3306
+mysql_root_password: rootpassword
+mysql_user: dbuser
+mysql_password: dbpassword
+mysql_database: mydatabase

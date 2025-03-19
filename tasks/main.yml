@@ -1,1 +1,6 @@
+---
+- name: Install MySQL Server
+  include_tasks: install.yml
 
+- name: Configure MySQL
+  include_tasks: config.yml

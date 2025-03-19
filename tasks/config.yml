@@ -1,0 +1,42 @@
+---
+- name: Set MySQL root password
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    host: "{{ mysql_host }}"
+    state: present
+
+- name: Ensure MySQL configuration allows external connections
+  lineinfile:
+    path: /etc/mysql/mysql.conf.d/mysqld.cnf
+    regexp: '^#?bind-address\s*='
+    line: 'bind-address = 0.0.0.0'
+    state: present
+  notify: Restart MySQL
+
+- name: Grant MySQL root user all privileges from any host
+  mysql_user:
+    name: root
+    password: "{{ mysql_root_password }}"
+    host: "%"
+    priv: "*.*:ALL"
+    state: present
+  notify: Restart MySQL
+
+- name: Create MySQL Database
+  mysql_db:
+    name: "{{ mysql_database }}"
+    state: present
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    login_host: "{{ mysql_host }}"
+
+- name: Create MySQL User
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    priv: "{{ mysql_database }}.*:ALL"
+    state: present
+  notify: Restart MySQL
+
+

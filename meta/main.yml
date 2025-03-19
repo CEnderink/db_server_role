@@ -1,1 +1,21 @@
-
+---
+galaxy_info:
+  role_name: mysql_server
+  author: "Chiel Enderink"
+  description: "Installeert en configureert MySQL-server met een database en gebruiker."
+  license: "MIT"
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - "20.04"
+        - "22.04"
+    - name: Debian
+      versions:
+        - "10"
+        - "11"
+  galaxy_tags:
+    - mysql
+    - database
+    - sql
+dependencies: []
